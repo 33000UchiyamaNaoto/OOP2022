@@ -19,6 +19,7 @@ namespace DistanceConverter {
             for (int feet = start; feet <= stop; feet++) {
                 double meter = FeetConverter.ToMeter(feet);
                 Console.WriteLine("{0} ft = {1:0.0000} m", feet, meter);
+
             }
         }
         //メートルからフィートへの対応表を出力
