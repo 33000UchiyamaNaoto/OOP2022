@@ -10,26 +10,26 @@ namespace Exercise02 {
         static void Main(string[] args) {
             if (args.Length >= 1 && args[0] == "-tom") {
                 // フィートからメートルへの対応表を出力
-                PrintFeetToMeterList(1, 10);
+                PrintInchToMeterList(1, 10);
             }
-            else {
+            else if(args.Length >= 1 && args[0] == "-toi") {
                 // メートルからフィートへの対応表を出力
-                PrintMeterToFeetList(1, 10);
+                PrintMeterToInchList(1, 10);
             }
         }
         //フィートからメートルへの対応表を出力
-        private static void PrintFeetToMeterList(int start, int stop) {
-            for (int feet = start; feet <= stop; feet++) {
-                double meter = FeetConverter.ToMeter(feet);
-                Console.WriteLine("{0} ft = {1:0.0000} m", feet, meter);
+        private static void PrintInchToMeterList(int start, int stop) {
+            for (int inch = start; inch <= stop; inch++) {
+                double meter = InchConverter.ToMeter(inch);
+                Console.WriteLine("{0} inch = {1:0.0000} m", inch, meter);
 
             }
         }
         //メートルからフィートへの対応表を出力
-        private static void PrintMeterToFeetList(int start, int stop) {
+        private static void PrintMeterToInchList(int start, int stop) {
             for (int meter = 1; meter <= 10; meter++) {
-                double feet = FeetConverter.FromMeter(meter);
-                Console.WriteLine("{0} m = {1:0.0000} ft", meter, feet);
+                double inch = InchConverter.FromMeter(meter);
+                Console.WriteLine("{0} m = {1:0.0000} inch", meter, inch);
             }
         }
     }

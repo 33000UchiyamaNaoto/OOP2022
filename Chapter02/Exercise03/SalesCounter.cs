@@ -26,6 +26,18 @@ namespace Exercise03 {
             return dict;
         }
 
+        //カテゴリー別売り上げを求める
+        public IDictionary<string, int> GetPerCategorySales() {
+            var dict = new Dictionary<string, int>();
+            foreach (var sale in _sales) {
+                if (dict.ContainsKey(sale.ProductCategory))
+                    dict[sale.ProductCategory] += sale.Amount;
+                else
+                    dict[sale.ProductCategory] = sale.Amount;
+            }
+            return dict;
+        }
+
         //売り上げデータを読み込み、Saleオブジェクトのリストを返す
         public static IEnumerable<Sale> ReadSales(string filePath) {
             List<Sale> sales = new List<Sale>();
