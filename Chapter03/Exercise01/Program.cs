@@ -9,12 +9,33 @@ namespace Exercise01 {
         static void Main(string[] args) {
             var numbers = new List<int> { 12, 87, 94, 14, 53, 20, 40, 35, 76, 91, 31, 17, 48 };
 
-            Exercise1_1(numbers);
+          //  Exercise1_1(numbers);
             Console.WriteLine("-------------");
 
-            Exercise1_2(numbers);
+          //  Exercise1_2(numbers);
             Console.WriteLine("-------------");
 
+            Exercise1_3(numbers);
+            Console.WriteLine("-------------");
+
+            Exercise1_4(numbers);
+
+        }
+
+        private static void Exercise1_3(List<int> numbers) {
+            foreach (var n in numbers.Where(n => n >= 50)) {
+                Console.WriteLine(n);
+            }
+        }
+
+        private static void Exercise1_4(List<int> numbers) {
+            var list = numbers.Select(n => n * 2).ToArray();
+
+            numbers[5] = 5000;
+
+            foreach (var n in list) {   //遅延実行（即時実行）
+                Console.WriteLine(n);
+            }
         }
 
         private static void Exercise1_1(List<int> numbers) {
