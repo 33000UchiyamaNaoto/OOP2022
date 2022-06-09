@@ -12,25 +12,23 @@ namespace Sample0607
 {
     public partial class Form1 : Form
     {
+        Random rand = new Random(); //乱数オブジェクト生成
+
+        //コンストラクタ
         public Form1()
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        //ボタンクリックイベントハンドラ
+        private void btRandom_Click(object sender, EventArgs e)
         {
-            if(nudNum2.Value != 0)
-            {
-                nudAns.Value = nudNum1.Value / nudNum2.Value;
-                nudMod.Value = nudNum1.Value % nudNum2.Value;
-            }
-            else
-            {
-                MessageBox.Show("０で割り算できません！",
-                    "エラー",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);                
-            }
+            Number.Value = rand.Next(minValue: (int)Min.Value, maxValue: (int)Max.Value + 1);
+
+        }
+        //イベントハンドラ（起動時に一度だけ実行）
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
