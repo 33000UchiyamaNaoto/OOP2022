@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -46,21 +48,23 @@ namespace AddressBook
                 Company = cbCompany.Text,
                 Picture = pbPicture.Image,
                 listGroup = GetCheckBoxGroup(),
+                Registration = dtpRegistDate.Value,
             };
             listPerson.Add(newPerson);
             dgvPersons.Rows[dgvPersons.RowCount - 1].Selected = true;
 
-            if (listPerson.Count() > 0)
-            {
-                btDelete.Enabled = true;
-                btUpdate.Enabled = true;
-            }
+            EnabledCheck(); //マスク処理呼び出し
 
-            //コンボボックスに会社名を登録する（重複なし）
-            if (!cbCompany.Items.Contains(cbCompany.Text))
+            setCbCompany(cbCompany.Text);
+        }
+
+        //コンボボックスに会社名を登録する（重複なし）
+        private void setCbCompany(string company)
+        {   
+            if (!cbCompany.Items.Contains(company))
             {
                 //まだ登録されていなければ登録処理
-                cbCompany.Items.Add(cbCompany.Text);
+                cbCompany.Items.Add(company);
             }
         }
 
@@ -105,6 +109,9 @@ namespace AddressBook
             cbCompany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
 
+            dtpRegistDate.Value = 
+                listPerson[index].Registration.Year > 1900 ? listPerson[index].Registration : DateTime.Today;
+
             groupCheckBoxAllClear();    //グループチェックボックスを一旦初期化
 
             foreach (var group in listPerson[index].listGroup)
@@ -144,24 +151,76 @@ namespace AddressBook
             listPerson[dgvPersons.CurrentRow.Index].Company = cbCompany.Text;
             listPerson[dgvPersons.CurrentRow.Index].listGroup = GetCheckBoxGroup();
             listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
+            listPerson[dgvPersons.CurrentRow.Index].Registration = dtpRegistDate.Value;
             dgvPersons.Refresh(); //データグリッドビュー更新
         }
         //削除ボタンが押された時の処理
         private void btDelete_Click(object sender, EventArgs e)
         {
             listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
+            EnabledCheck(); //マスク処理呼び出し
+        }
 
-            if (listPerson.Count() == 0)
-            {
-                btDelete.Enabled = false;
-                btUpdate.Enabled = false;
-            }
+        //更新・削除ボタンのマスク処理行う（マスク判定含む）
+        private void EnabledCheck()
+        {
+            btUpdate.Enabled = btDelete.Enabled = listPerson.Count() > 0 ? true : false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            btDelete.Enabled = false;   //削除ボタンをマスク
-            btUpdate.Enabled = false;   //更新ボタン
+            EnabledCheck(); //マスク処理呼び出し
+        }
+
+        //保存ボタンのイベントハンドラ
+        private void btSave_Click(object sender, EventArgs e)
+        {
+            if (sfdSaveDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    //バイナリ形式でシリアル化
+                    var bf = new BinaryFormatter();
+                    using (FileStream fs = File.Open(sfdSaveDialog.FileName, FileMode.Create))
+                    {
+                        bf.Serialize(fs, listPerson);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btOpen_Click(object sender, EventArgs e)
+        {
+            if (ofdFileOpenDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    //バイナリ形式で逆シリアル化
+                    var bf = new BinaryFormatter();
+                    using(FileStream fs = File.Open(ofdFileOpenDialog.FileName, FileMode.Open, FileAccess.Read))
+                    {
+                        //逆シリアル化して読み込む
+                        listPerson = (BindingList<Person>) bf.Deserialize(fs);
+                        dgvPersons.DataSource = null;
+                        dgvPersons.DataSource = listPerson;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                cbCompany.Items.Clear();    //コンボボックスのアイテム消去
+                //コンボボックスへ新規登録
+                foreach (var item in listPerson.Select(p => p.Company))
+                {
+                    setCbCompany(item); //存在する会社を登録
+                }
+            }
+            EnabledCheck(); //マスク処理呼び出し
         }
     }
 }

@@ -50,6 +50,11 @@ namespace AddressBook
             this.btUpdate = new System.Windows.Forms.Button();
             this.btDelete = new System.Windows.Forms.Button();
             this.cbCompany = new System.Windows.Forms.ComboBox();
+            this.btOpen = new System.Windows.Forms.Button();
+            this.btSave = new System.Windows.Forms.Button();
+            this.sfdSaveDialog = new System.Windows.Forms.SaveFileDialog();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dtpRegistDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).BeginInit();
             this.SuspendLayout();
@@ -109,13 +114,13 @@ namespace AddressBook
             this.dgvPersons.AllowUserToAddRows = false;
             this.dgvPersons.AllowUserToDeleteRows = false;
             this.dgvPersons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPersons.Location = new System.Drawing.Point(12, 285);
+            this.dgvPersons.Location = new System.Drawing.Point(100, 291);
             this.dgvPersons.MultiSelect = false;
             this.dgvPersons.Name = "dgvPersons";
             this.dgvPersons.ReadOnly = true;
             this.dgvPersons.RowTemplate.Height = 21;
             this.dgvPersons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPersons.Size = new System.Drawing.Size(708, 196);
+            this.dgvPersons.Size = new System.Drawing.Size(626, 196);
             this.dgvPersons.TabIndex = 1;
             this.dgvPersons.Click += new System.EventHandler(this.dgvPersons_Click);
             // 
@@ -260,17 +265,59 @@ namespace AddressBook
             this.cbCompany.Size = new System.Drawing.Size(362, 32);
             this.cbCompany.TabIndex = 7;
             // 
+            // btOpen
+            // 
+            this.btOpen.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btOpen.Location = new System.Drawing.Point(12, 377);
+            this.btOpen.Name = "btOpen";
+            this.btOpen.Size = new System.Drawing.Size(76, 44);
+            this.btOpen.TabIndex = 4;
+            this.btOpen.Text = "開く...";
+            this.btOpen.UseVisualStyleBackColor = true;
+            this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
+            // 
+            // btSave
+            // 
+            this.btSave.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btSave.Location = new System.Drawing.Point(12, 427);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(76, 44);
+            this.btSave.TabIndex = 4;
+            this.btSave.Text = "保存...";
+            this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(499, 497);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 12);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "登録日";
+            // 
+            // dtpRegistDate
+            // 
+            this.dtpRegistDate.Location = new System.Drawing.Point(542, 493);
+            this.dtpRegistDate.Name = "dtpRegistDate";
+            this.dtpRegistDate.Size = new System.Drawing.Size(178, 19);
+            this.dtpRegistDate.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 493);
+            this.ClientSize = new System.Drawing.Size(738, 529);
+            this.Controls.Add(this.dtpRegistDate);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.cbCompany);
             this.Controls.Add(this.btPictureClear);
             this.Controls.Add(this.btPictureOpen);
             this.Controls.Add(this.pbPicture);
             this.Controls.Add(this.btDelete);
             this.Controls.Add(this.btUpdate);
+            this.Controls.Add(this.btSave);
+            this.Controls.Add(this.btOpen);
             this.Controls.Add(this.btAddPerson);
             this.Controls.Add(this.cbOther);
             this.Controls.Add(this.cbWork);
@@ -318,6 +365,11 @@ namespace AddressBook
         private System.Windows.Forms.Button btUpdate;
         private System.Windows.Forms.Button btDelete;
         private System.Windows.Forms.ComboBox cbCompany;
+        private System.Windows.Forms.Button btOpen;
+        private System.Windows.Forms.Button btSave;
+        private System.Windows.Forms.SaveFileDialog sfdSaveDialog;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker dtpRegistDate;
     }
 }
 
