@@ -12,22 +12,17 @@ namespace XmlSample
     {
         static void Main(string[] args)
         {
-            using (var wc = new WebClient())
+            var xdoc = XDocument.Load("novelists.xml");
+            var novelists = xdoc.Root.Elements()
+                                .Select(x => new {
+                                    Name = (string)x.Element("name"),
+                                    Birth = (DateTime)x.Element("birth"),
+                                    Death = (DateTime)x.Element("death")
+                                });
+            foreach (var novelist in novelists)
             {
-                var stream = wc.OpenRead("https://news.yahoo.co.jp/rss/media/jomo/all.xml");
-
-                var xdoc = XDocument.Load(stream);
-                var xTitle = xdoc.Root.Descendants("item").Select(x => (string)x.Element("title"));
-                var xLink = xdoc.Root.Descendants("item").Select(x => (string)x.Element("title"));
-
-                foreach (var data in xTitle)
-                {
-                    Console.WriteLine(data);
-                }
-                foreach (var data in xLink)
-                {
-                    Console.WriteLine(data);
-                }
+                Console.WriteLine("{0} ({1}-{2})",
+                                   novelist.Name, novelist.Birth.Year, novelist.Death.Year);
             }
         }
     }
