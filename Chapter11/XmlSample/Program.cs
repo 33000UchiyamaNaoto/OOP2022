@@ -17,9 +17,14 @@ namespace XmlSample
                 var stream = wc.OpenRead("https://news.yahoo.co.jp/rss/media/jomo/all.xml");
 
                 var xdoc = XDocument.Load(stream);
-                var xNews = xdoc.Root.Descendants("item").Select(x=>x.Element("title"));
+                var xTitle = xdoc.Root.Descendants("item").Select(x => (string)x.Element("title"));
+                var xLink = xdoc.Root.Descendants("item").Select(x => (string)x.Element("title"));
 
-                foreach (var data in xNews)
+                foreach (var data in xTitle)
+                {
+                    Console.WriteLine(data);
+                }
+                foreach (var data in xLink)
                 {
                     Console.WriteLine(data);
                 }
