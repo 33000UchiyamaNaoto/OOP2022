@@ -60,6 +60,7 @@ namespace AddressBook
             this.rbMobile = new System.Windows.Forms.RadioButton();
             this.rbHome = new System.Windows.Forms.RadioButton();
             this.tbTelNumber = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).BeginInit();
             this.gbKindNumber.SuspendLayout();
@@ -360,11 +361,22 @@ namespace AddressBook
             this.tbTelNumber.Size = new System.Drawing.Size(292, 31);
             this.tbTelNumber.TabIndex = 2;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(630, 297);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(738, 731);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.gbKindNumber);
             this.Controls.Add(this.dtpRegistDate);
             this.Controls.Add(this.label6);
@@ -437,6 +449,7 @@ namespace AddressBook
         private System.Windows.Forms.RadioButton rbMobile;
         private System.Windows.Forms.RadioButton rbHome;
         private System.Windows.Forms.TextBox tbTelNumber;
+        private System.Windows.Forms.Button button1;
     }
 }
 

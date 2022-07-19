@@ -14,6 +14,7 @@ namespace AddressBook
 {
     public partial class Form1 : Form
     {
+        int mode = 0;
         //住所データ管理用リスト
         BindingList<Person> listPerson = new BindingList<Person>();
 
@@ -266,6 +267,13 @@ namespace AddressBook
                 }
             }
             EnabledCheck(); //マスク処理呼び出し
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pbPicture.SizeMode = (PictureBoxSizeMode)mode;
+            tbName.Text = pbPicture.SizeMode.ToString();
+            mode = mode < 4 ? ++mode : 0;
         }
     }
 }
