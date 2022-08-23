@@ -41,7 +41,7 @@ namespace CarReportSystem
             if (cdColorSelect.ShowDialog() == DialogResult.OK)
             {
                 BackColor = cdColorSelect.Color;
-                settings.MainFormColor = "ddddddd";//;cdColorSelect.Color;   //設定オブジェクトへセット
+                settings.MainFormColor = cdColorSelect.Color.ToArgb();   //設定オブジェクトへセット
             }
         }
 
@@ -58,7 +58,7 @@ namespace CarReportSystem
             //設定ファイルをシリアル化（P305）
             using (var writer = XmlWriter.Create("settings.xml"))
             {
-                var serializer = new XmlSerializer(settings.GetType()); 
+                var serializer = new XmlSerializer(settings.GetType());
                 serializer.Serialize(writer, settings);
             }
         }
@@ -70,6 +70,7 @@ namespace CarReportSystem
             {
                 var serializer = new XmlSerializer(typeof(Settings));
                 settings = serializer.Deserialize(reader) as Settings;
+                BackColor = Color.FromArgb(settings.MainFormColor);
             }
 
             EnabledCheck(); //マスク処理呼び出し
