@@ -5,24 +5,24 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // 制御されます。アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更します。
-[assembly: AssemblyTitle("Section01")]
+[assembly: AssemblyTitle("CarReportSystem")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Section01")]
+[assembly: AssemblyProduct("CarReportSystem")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // ComVisible を false に設定すると、このアセンブリ内の型は COM コンポーネントから
 // 参照できなくなります。COM からこのアセンブリ内の型にアクセスする必要がある場合は、
-// その型の ComVisible 属性を true に設定します。
+// その型の ComVisible 属性を true に設定してください。
 [assembly: ComVisible(false)]
 
 // このプロジェクトが COM に公開される場合、次の GUID が typelib の ID になります
-[assembly: Guid("9b8f4aef-a84a-46ed-b572-34f34d23416e")]
+[assembly: Guid("f086291b-4728-489b-bf45-220ded3db983")]
 
-// アセンブリのバージョン情報は次の 4 つの値で構成されています:
+// アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
 //
 //      メジャー バージョン
 //      マイナー バージョン

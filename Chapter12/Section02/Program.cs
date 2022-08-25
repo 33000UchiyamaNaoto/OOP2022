@@ -9,11 +9,13 @@ using System.Xml.Serialization;
 
 namespace Section02
 {
-
+    [XmlRoot("novels")]
     public class NovelCollection
     {
+        [XmlElement(Type = typeof(Novel),ElementName ="novel")]
         public Novel[] Novels { get; set; }
     }
+
 
     class Program
     {
@@ -22,7 +24,6 @@ namespace Section02
             SerializeToFile();
             //Deserialize();
         }
-
 
         //List 12-6
         public static void SerializeToFile()
@@ -35,16 +36,16 @@ namespace Section02
             //};
 
             var novels = new Novel[] {
-                new Novel {
-                    Author = "ジェイムズ・P・ホーガン",
-                    Title = "星を継ぐもの",
-                    Published = 1977,
-                },
-                new Novel {
-                    Author = "H・G・ウェルズ",
-                    Title = "タイム・マシン",
-                    Published = 1895,
-                },
+               new Novel {
+                  Author = "ジェイムズ・P・ホーガン",
+                  Title = "星を継ぐもの",
+                  Published = 1977,
+               },
+               new Novel {
+                  Author = "H・G・ウェルズ",
+                  Title = "タイム・マシン",
+                  Published = 1895,
+               },
             };
 
             var novelCollection = new NovelCollection
@@ -59,7 +60,7 @@ namespace Section02
                 serializer.Serialize(writer, novelCollection);
             }
 
-            Display("novel.xml");
+            Display("novels.xml");
 
         }
 
@@ -69,12 +70,13 @@ namespace Section02
         {
             using (var reader = XmlReader.Create("novels.xml"))
             {
-                var serializer = new XmlSerializer(typeof(Novel[]));
-                var novels = serializer.Deserialize(reader) as Novel[];
+                var serializer = new XmlSerializer(typeof(NovelCollection));
+                var novels = serializer.Deserialize(reader) as NovelCollection;
                 // 以下、内容を確認するコード
-                foreach (var item in novels)
+                //Console.WriteLine(novel);
+                foreach (var novel in novels.Novels)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine(novel);
                 }
             }
         }
@@ -87,5 +89,6 @@ namespace Section02
                 Console.WriteLine(line);
 
         }
+
     }
 }

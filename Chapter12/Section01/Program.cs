@@ -13,6 +13,7 @@ namespace Section01
     {
         static void Main(string[] args)
         {
+            //Serialize();
             Deserialize();
         }
 
@@ -48,11 +49,11 @@ namespace Section01
             };
             using (var writer = XmlWriter.Create("novels.xml", settings))
             {
-                var serializer = new DataContractSerializer(novels.GetType());
+                var serializer = new DataContractSerializer(novels.GetType());   //P185
                 serializer.WriteObject(writer, novels);
             }
 
-            Display("novel.xml");
+            Display("novels.xml");
         }
 
         //List 12-3
@@ -64,9 +65,9 @@ namespace Section01
                 var serializer = new DataContractSerializer(typeof(Novel[]));
                 var novels = serializer.ReadObject(reader) as Novel[];
                 //Console.WriteLine(novel);
-                foreach (var item in novels)
+                foreach (var novel in novels)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine(novel);
                 }
             }
         }
@@ -79,6 +80,5 @@ namespace Section01
                 Console.WriteLine(line);
 
         }
-
     }
 }
