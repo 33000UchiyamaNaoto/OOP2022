@@ -65,6 +65,8 @@ namespace CarReportSystem
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: このコード行はデータを 'infosys202200DataSet.CarReportDB' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            this.carReportDBTableAdapter.Fill(this.infosys202200DataSet.CarReportDB);
             try
             {
                 //設定ファイルを逆シリアル化（P307）して背景の色を設定
@@ -243,6 +245,13 @@ namespace CarReportSystem
                     MessageBox.Show(ex.Message);
                 }
             }
+        }
+
+        private void carReportDBBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
+            this.Validate();
+            this.carReportDBBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202200DataSet);
+
         }
     }
 }
