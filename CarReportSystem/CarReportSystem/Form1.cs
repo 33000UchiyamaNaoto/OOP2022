@@ -253,5 +253,9 @@ namespace CarReportSystem
             this.tableAdapterManager.UpdateAll(this.infosys202200DataSet);
 
         }
+
+        private void carReportDBDataGridView_Click(object sender, EventArgs e) {
+
+        }
     }
 }
